@@ -1,0 +1,8 @@
+# Scalar parameters for the individual objects of a particular class
+
+object  length  slope   roughness
+
+reach1  1000.   1.e-03  20.
+reach2  5400.   1.e-03  25.
+reach3  3300.   1.e-04  30.
+

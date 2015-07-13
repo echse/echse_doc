@@ -1,0 +1,8 @@
+# External forcings: Assignment of time series files & attributes
+
+variable  sums   past  file
+
+rain      true   true  precipitation.txt
+flow      false  true  flowrates.txt
+wind      false  true  windspeed.txt
+

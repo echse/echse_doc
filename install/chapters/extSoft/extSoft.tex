@@ -1,0 +1,143 @@
+
+\chapter{Required external software} \label{chap:extSoft}
+\renewcommand{\tabdir}{chapters/extSoft/extSoft/tab}
+\renewcommand{\figdir}{chapters/extSoft/extSoft/fig}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Before installing software} \label{sec:extSoft:generalNotes}
+Be aware of the fact that the installation of any software, in particular if downloaded from the internet, is a potentially dangerous. If you install the suggested software, you do this at your own risk! To minimize the risk, it is recommended that you
+\begin{itemize}
+  \item download the software from their official websites.
+  \item scan downloaded files for viruses before execution.
+  \item make regular backups of all important files to be prepared even for the worst case.
+\end{itemize}
+
+Note that you probably need administrator privileges to successfully install any of the software tools mentioned in the subsequent sections.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Statistical computing software 'R'} \label{sec:extSoft:R}
+
+\subsection{What is it good for?} \label{sec:extSoft:R:why}
+Most of the \software{echse}-related pre- and post-processing tools are implemented in the R language. The \software{echse}'s code generator is currently implementend as an R-package too.
+
+\subsection{Basic installation} \label{sec:extSoft:R:basic}
+R is a widely used software for statistical computing and graphics creation \citep{R}. It is freely available for most platforms, including Linux and Windows. The official address of the project is \url{http://www.r-project.org}.
+
+To find out whether R is installed on your system, type \verb!R --version! at the command line. If R is available, a version info similar to the one shown below should appear.
+\begin{lstlisting}[style=shell]
+dkneis@teufelsturm:/$ R --version
+R version 2.10.1 (2009-12-14)
+Copyright (C) 2009 The R Foundation [...]
+ISBN 3-900051-07-0
+[...]
+dkneis@teufelsturm:/$
+\end{lstlisting}
+
+If this is not the case, you need to install R. Linux users need to use the package manager or an appropriate apt-command. Users of Windows need to go through the following steps:
+
+\begin{enumerate}
+  \item Visit \url{http://www.r-project.org}
+  \item Save the installer for the latest version. The file name should be like \verb!R-0.00.0-win.exe! (\verb!0.00.0! = version).
+  \item Execute this file and follow the instructions.
+  \item Update your \verb!PATH! environment variable to include the directory where the R binaries reside. If you installed R in folder \verb!c:\program files!, for example, this will typically be \verb!c:\program files\R\R-0.00.0\bin!. See Appendix \ref{chap:appendix:envVars} for information on how to set or modify environment variables.
+  \item Open a \textbf{new} terminal and check for a proper installation by querying the R version (see instructions above).
+\end{enumerate}
+
+\subsection{Installation of add-on packages} \label{sec:extSoft:R:packages}
+
+For some applications it may be necessary to install additional R-packages. These packages are not included in the basic R distribution and must be obtained separately.
+
+\begin{description}
+  \item[Officially published R packages] can be found on the CRAN website (CRAN: Comprehensive R Archive Network; see link at \url{http://www.r-project.org}). Typically, versions for several platforms and additional documentation material in PDF format is provided.
+  \item[Other packages] which are non officially published on CRAN are most often distributed as so-called tarballs. These are compressed archive files with the file extension \verb!.tar.gz!.
+\end{description}
+
+On some systems (namely Windows), a menue is available at the top of the R console window that allows for convenient package installation, including download from CRAN. The system-independend way of package installation, however, uses the command line. Assuming that the package is available as a tarball, the following shell command should work on all platforms. In the example, 'pname' is the package name and 'x.y' is a version number.
+
+\begin{lstlisting}[style=shell]
+R CMD INSTALL pname_x.y.tar.gz
+\end{lstlisting}
+
+To check whether an add-on package is properly installed use the R commands \verb!library()! or \verb!require()!.
+
+For more help on package installation either type \verb!?INSTALL! at the R prompt or use the shell command \verb!R CMD INSTALL --help! from a normal terminal. Experience shows that package installation on Windows systems is sometimes difficult. If the installation fails due to permission issues, one could try to open a terminal with administrator privileges and then run the \verb!R CMD INSTALL! command shown above.
+
+Sometimes more difficulties arise if native source code (Fortran, C, C++) needs to be compiled during package installation. In such cases, the instructions given at \url{http://cran.r-project.org/doc/manuals/R-admin.html#The-Windows-toolset} may help. It seems that a common source of trouble is the existence of multiple parallel installations of a 'make' program or compilers (gfortran, gcc). In those cases, it may be necessary to modify the \verb!PATH! environment variable (put the R-related directories first).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{The GNU C++ compiler 'g++'} \label{sec:extSoft:gpp}
+
+\subsection{What is it good for?} \label{sec:extSoft:gpp:why}
+g++ is the C++ compiler from the GNU compiler collection (gcc). It is a widely used, free software and runs on several platforms including Linux and Windows. It is used to compile the \software{echse}'s C++ source code. It may also be used to compile those pre- and/or post-processor tools which are implemented in C++.
+
+\subsection{Installation} \label{sec:extSoft:gpp:basic}
+
+To find out whether g++ is installed on your system, type \verb!g++ --ver! at the command line. If the compiler is available, a version info similar to the one shown below should appear.
+
+\begin{lstlisting}[style=shell]
+dkneis@teufelsturm:/$ g++ --ver
+Using built-in specs.
+Target: i486-linux-gnu
+Configured with: ../src/configure -v     [...]
+Thread model: posix
+gcc version 4.4.3 (Ubuntu 4.4.3-4ubuntu5)
+dkneis@teufelsturm:/$
+\end{lstlisting}
+
+If this is not the case, you need to install the g++ compiler. Linux users need to use the package manager or an appropriate apt-command. Users of Windows need to install MinGW and MSYS by going through the following steps:
+
+\begin{enumerate}
+  \item Remove an older MinGW version if present. This is normally achieved by deleting the entire MinGW folder. You should make sure, however, that no other applications depend on that old version.
+  \item Visit \url{http://www.mingw.org}
+  \item From the download area, save the latest version of the installer. The file name should be like \verb!mingw-get-inst-YYYYMMDD.exe! (\verb!YYYYMMDD! = a date).
+  \item Execute this file. In the dialogue, select at least the following components for installation:
+    \begin{itemize}
+      \item MinGW compiler suite -- C++ compiler. This will install g++.
+      \item MinGW developer toolkit including the MSYS basic system.
+    \end{itemize}
+  It is not a bad idea to also select the Fortran gfortran from the MinGW compiler suite for installation.
+  \item The user-selected path of the installation directory should not contain blanks (recommended: \verb!c:/mingw!).
+  \item Note that the installer first downloads many files. Thus, you need an active internet connection.
+  \item Update your \verb!PATH! environment variable to include the two directories
+    \begin{itemize}
+      \item \verb!c:\mingw\bin! (contains MinGW binaries) and
+      \item \verb!c:\mingw\msys\<x.y>\bin! (contains MSYS binaries)
+    \end{itemize}
+   where \verb!c:\mingw! is the assumed (and recommended) installation directory and \verb!<x.y>! is a version number. See Appendix \ref{chap:appendix:envVars} for information on how to set or modify environment variables.
+  \item Open a \textbf{new} terminal and check for a proper installation by querying the version of g++ (see instructions above).
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{The GNU Fortran compiler 'gfortran'} \label{sec:extSoft:gfortran}
+
+\subsection{What is it good for?} \label{sec:extSoft:gfortran:why}
+gfortran is the Fortran compiler of the GNU compiler collection (gcc). It supports the Fortran 95 standard (at least), it is freely available and widely used. The gfortran compiler is required to compile Fortran code used by \software{echse}-related pre- and/or post-processing tools, namely some R packages.
+
+\subsection{Installation} \label{sec:extSoft:gfortran:basic}
+
+To find out whether gfortran is installed on your system, type \verb!gfortran --version! at the command line. If the compiler is available, a version info similar to the one shown below should appear.
+\begin{lstlisting}[style=shell]
+dkneis@teufelsturm:/$ gfortran --version
+GNU Fortran (Ubuntu 4.4.3-4ubuntu5) 4.4.3
+Copyright (C) 2010 Free Software F[...]
+[...]
+dkneis@teufelsturm:/$
+\end{lstlisting}
+
+If this is not the case, you need to install gfortran. Linux users need to use the package manager or an appropriate apt-command. Users of Windows please go through all the steps described in the enumeration at the end of \secref{sec:extSoft:gpp}. In the dialog where you need to select components for installation, simply chose the Fortran compiler instead of (or in addition to) the C++ compiler.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{MSYS (Windows users only)} \label{sec:extSoft:msys}
+
+MSYS provides basic Linux command line utilities for use on Windows systems. Using MSYS, it is possible to execute Linux bash shell scripts also on Windows systems. If you installed the C++ compiler g++ following the instructions in \secref{sec:extSoft:gpp}, you should already have MSYS on your system. If not, please follow the instructions in \secref{sec:extSoft:gpp} and optionally skip the installation of a compiler.
+
+If MSYS is properly installed, commands like \verb!pwd! or \verb!ls! should work when typed at a Windows command prompt. These commands show the current directory and list its contents, respectively.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{A convenient text editor} \label{sec:extSoft:editor}
+
+On Linux systems, appropriate text editors are installed by default. On Windows, the default editor is hardly usable for serious text editing. NOTEPAD++ appears to be a good and free alternative.

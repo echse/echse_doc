@@ -1,0 +1,11 @@
+# Storage volume (cbm) of a river reach as a function of the flow rate (cbm/s)
+
+flow	volume
+
+0.0   0.000
+0.2   244.778
+0.5   460.687
+1.0   759.379
+2.0   1402.216
+5.0   3290.339
+

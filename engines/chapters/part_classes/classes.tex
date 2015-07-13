@@ -1,0 +1,190 @@
+\chapter{Classes for hydrological catchment modeling} \label{chap:classes:catchmod}
+
+%NOTE: This code is required by the datatool package to make the reading of TAB-separated text files actually work
+\catcode`\^^I=12 %
+\DTLsetseparator{	}%
+
+% Generate a long table listing all data members
+%
+% Arg 1: A name for the data base (e.g. use the class' name)
+% Arg 2: The data file listing the members
+% Arg 3: The table caption
+% Arg 4: The label string
+\newcommand{\tableOfMembers}[4]{%
+\DTLloadrawdb{#1}{#2}
+%\begin{landscape}
+\begin{center}
+\begin{longtable}{llll}
+%\begin{tabular}{llll} \\
+\caption{#3 \label{#4}} \\
+\hline
+\fmtClassDesc\bfseries Type & \fmtClassDesc\bfseries Name & \fmtClassDesc\bfseries Description & \fmtClassDesc\bfseries Unit\\
+\hline
+\endfirsthead
+\multicolumn{4}{c}%
+{\tablename\ \thetable\ -- \textit{Continued from previous page}} \\
+\hline
+\fmtClassDesc\bfseries Type & \fmtClassDesc\bfseries Name & \fmtClassDesc\bfseries Description & \fmtClassDesc\bfseries Unit\\
+\hline
+\endhead
+\hline \multicolumn{4}{r}{\textit{Continued on next page}} \\
+\endfoot
+\hline
+\endlastfoot
+\DTLforeach{#1}
+{\membertype=type,\membername=name,\memberdescr=description,\memberunit=unit}
+{%
+  \DTLiffirstrow{}{\\}%
+  \fmtClassDesc \membertype & \fmtClassDesc \membername & \fmtClassDesc \memberdescr & \fmtClassDesc \memberunit%
+}%
+\end{longtable}
+%\end{tabular}
+\end{center}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Default sub-basin class} \label{sec:classes:catchmod:subbasin-default}
+
+\subsection{Simulated processes} \label{sec:classes:catchmod:subbasin-default:processes}
+The class simulates the processes listed in \tabref{tab:classes:catchmod:subbasin-default:processes}.
+
+\begin{table}
+  \caption{Considered processes in the default sub-basin class. \label{tab:classes:catchmod:subbasin-default:processes}}
+\begin{tabular}{|p{0.28\textwidth}p{0.7\textwidth}|} \hline
+  \rowcolor[gray]{0.9}
+  Process & Model concept \\ \hline
+  Runoff generation & Conceptual four components model (\secref{sec:runGen4comp}) \\
+  Runoff concentration & Parallel linear reservoirs (\secref{sec:runConcParStor}) \\
+  Evapotranspiration & Potential evapotranspiration after Makkink with crop factors and correction for soil water limitation (\secsref{sec:et:pot:makkink}, \ref{sec:et:real:cropfactors}, and \ref{sec:et:real:soilmoisture}) \\
+  Snow storage and melt & Energy balance model (\secref{sec:snow-enBal}) \\
+  \hline
+\end{tabular}
+\end{table}
+
+The current version of the class does \emph{not} allow for the representation of hydrological response units. Only three classes of land cover are currently distinguished: (1) water surfaces, (2) impervious surfaces, and (3) pervious surfaces, \ie{} soil typically covered by vegetation.
+
+\subsection{Data members} \label{sec:classes:catchmod:subbasin-default:members}
+A full list of the data members of the class is provided in \tabref{tab:classes:catchmod:subbasin-default:members}. See \citet{Echse-Main-Doc} for an explanation of the abbreviations in the 'type' column.
+
+\begin{landscape}
+\tableOfMembers{subbasin-default}{\ECHSEENGINES/classes/declaration/cat_hypsoRR.txt}{Data members of the default sub-basin class.}{tab:classes:catchmod:subbasin-default:members}
+\end{landscape}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Default reach class} \label{sec:classes:catchmod:reach-default}
+
+\subsection{Simulated processes} \label{sec:classes:catchmod:reach-default:processes}
+The reach class simulates the outflow from a river reach given information on the inflow and its storage characteristics. The concept is described in \secref{sec:chanFlow_singleRes}.
+
+\subsection{Data members} \label{sec:classes:catchmod:reach-default:members}
+A list of the data members of the class is provided in \tabref{tab:classes:catchmod:reach-default:members}. See \citet{Echse-Main-Doc} for an explanation of the abbreviations in the 'type' column.
+
+%\begin{landscape}
+\tableOfMembers{reach-default}{\ECHSEENGINES/classes/declaration/rch.txt}{Data members of the default reach class.}{tab:classes:catchmod:reach-default:members}
+%\end{landscape}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Minireach class} \label{sec:classes:catchmod:minireach}
+
+\subsection{Simulated processes} \label{sec:classes:catchmod:minireach:processes}
+The minireach class simulates a reach (or pipe) of very short length so that the travel time is practically negligible. Thus, the outflow a minireach object is identical to the inflow.
+
+\subsection{Data members} \label{sec:classes:catchmod:minireach:members}
+A list of the data members of the class is provided in \tabref{tab:classes:catchmod:minireach:members}. See \citet{Echse-Main-Doc} for an explanation of the abbreviations in the 'type' column.
+
+%\begin{landscape}
+\tableOfMembers{minireach}{\ECHSEENGINES/classes/declaration/minirch.txt}{Data members of the minireach class.}{tab:classes:catchmod:minireach:members}
+%\end{landscape}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Node classes} \label{sec:classes:catchmod:nodes}
+
+\subsection{Simulated processes} \label{sec:classes:catchmod:nodes:processes}
+The purpose of node objects is to merge flows from different sources. The typical case is a node with two inflows (\eg{} a stream junction). Nodes with a higher numbner of inflows (or with just a single inflow) may be useful in some situations.
+
+\subsection{Data members} \label{sec:classes:catchmod:nodes:members}
+A list of the data members of the class is provided in \tabref{tab:classes:catchmod:nodes:members} for the example of two inflows. See \citet{Echse-Main-Doc} for an explanation of the abbreviations in the 'type' column.
+
+%\begin{landscape}
+\tableOfMembers{node}{\ECHSEENGINES/classes/declaration/node_n2.txt}{Data members of the node class with two inflows.}{tab:classes:catchmod:nodes:members}
+%\end{landscape}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Lake class} \label{sec:classes:catchmod:lake}
+
+\subsection{Simulated processes} \label{sec:classes:catchmod:lake:processes}
+The class simulates the outflow from an uncontrolled lake/reservoir based on a rating curve and a storage curve. Precipitation and evaporation losses are taken into account. Details are described in \secref{sec:resStor_lake}.
+
+\subsection{Data members} \label{sec:classes:catchmod:lake:members}
+A list of the data members of the class is provided in \tabref{tab:classes:catchmod:lake:members}. See \citet{Echse-Main-Doc} for an explanation of the abbreviations in the 'type' column.
+
+%\begin{landscape}
+\tableOfMembers{lake}{\ECHSEENGINES/classes/declaration/lake.txt}{Data members of the lake class.}{tab:classes:catchmod:lake:members}
+%\end{landscape}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Gage class} \label{sec:classes:catchmod:gage}
+
+\subsection{Simulated processes} \label{sec:classes:catchmod:gage:processes}
+In many situations it is sufficient to output the simulated flow rate of a river reach, making the explicit simulation of a gage object unnecessary. The advantage of instantiating an object of the gage class lies in the fact that the simulated flow may be optionally substituted by observed values. This is quite useful, for example, when a calibrating a model for the part of a river basins located downstream of a gage.
+
+\subsection{Data members} \label{sec:classes:catchmod:gage:members}
+A list of the data members of the class is provided in \tabref{tab:classes:catchmod:gage:members}. See \citet{Echse-Main-Doc} for an explanation of the abbreviations in the 'type' column.
+
+%\begin{landscape}
+\tableOfMembers{gage}{\ECHSEENGINES/classes/declaration/gage.txt}{Data members of the gage class.}{tab:classes:catchmod:gage:members}
+%\end{landscape}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Rain gage class} \label{sec:classes:catchmod:raingage}
+
+\subsection{Simulated processes} \label{sec:classes:catchmod:raingage:processes}
+Objects of this class can be used to query the precipitation at a point as computed from residual interpolation.
+
+\subsection{Data members} \label{sec:classes:catchmod:raingage:members}
+A list of the data members of the class is provided in \tabref{tab:classes:catchmod:raingage:members}. See \citet{Echse-Main-Doc} for an explanation of the abbreviations in the 'type' column.
+
+%\begin{landscape}
+\tableOfMembers{raingage}{\ECHSEENGINES/classes/declaration/raingage.txt}{Data members of the rain gage class.}{tab:classes:catchmod:raingage:members}
+%\end{landscape}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{External inflow class} \label{sec:classes:catchmod:ext-inflow}
+
+\subsection{Simulated processes} \label{sec:classes:catchmod:ext-inflow:processes}
+This class provides a simple means to represent an external water source. The time-variable flow rates are pre-defined, \ie{} read from a file. The class may also be helpful if a large-scale model is split into sub-models at the boundaries of major watersheds. In such a case, it may be desireable to save the runoff from an upstream area (sub-model A) to a file and re-read the data later when simulating the downstream part (sub-model B).
+
+\subsection{Data members} \label{sec:classes:catchmod:ext-inflow:members}
+A list of the data members of the class is provided in \tabref{tab:classes:catchmod:ext-inflow:members}. See \citet{Echse-Main-Doc} for an explanation of the abbreviations in the 'type' column.
+
+%\begin{landscape}
+\tableOfMembers{ext-inflow}{\ECHSEENGINES/classes/declaration/raingage.txt}{Data members of the external inflow class.}{tab:classes:catchmod:ext-inflow:members}
+%\end{landscape}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Reservoir class}
+This class is still experimental and not documented.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Flood control storage basin class}
+This class is still experimental and not documented.

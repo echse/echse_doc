@@ -1,0 +1,6 @@
+file    colname color type  name      header  comment  nodata  factor  xcut
+
+; Example with two series
+
+obs.txt	Q       cyan  S     Observed  TRUE    #        NA      1       FALSE
+sim.txt qx_avg  blue  S     Model     TRUE    #        NA      1       TRUE

@@ -1,0 +1,9 @@
+# Assignment of parameter functions to the objects of a particular class
+
+object  function  col_arg  col_val  file
+
+lake_A  storage	  volume   stage    data/functions/lake_A.txt
+lake_A  outflow	  stage    flow     data/functions/lake_A.txt
+lake_B  storage	  volume   stage    data/functions/lake_B.txt
+lake_B  outflow	  stage    flow     data/functions/lake_B.txt
+

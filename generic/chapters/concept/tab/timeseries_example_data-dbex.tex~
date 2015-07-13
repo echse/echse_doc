@@ -1,0 +1,23 @@
+\begin{shaded}
+\begin{verbatim}
+# 1st row (location IDs)
+Loc_1
+Loc_2
+Loc_3
+...
+Loc_n
+# 2nd row (data for 1st time step)
+1.0
+1.2
+3.3
+...
+-1.2
+# 3rd row (data for 2nd time step)
+1.0
+1.2
+3.3
+...
+-1.2
+...
+\end{verbatim}
+\end{shaded}

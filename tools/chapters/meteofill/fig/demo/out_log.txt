@@ -1,0 +1,2 @@
+time	numdata	availability	config_changed	residual_interp	r2
+2009-01-13 08:00:00	5	5.10204	1	false	NA

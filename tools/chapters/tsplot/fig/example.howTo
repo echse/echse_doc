@@ -1,0 +1,7 @@
+
+convert -resample 100 example.png example.pdf
+pdf2ps -r100 example.pdf
+ps2eps example.ps
+
+Finally, adjust the bounding box
+

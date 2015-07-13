@@ -1,0 +1,51 @@
+
+\chapter{Setting environment variables} \label{chap:appendix:envVars}
+\renewcommand{\tabdir}{appendix/envVars/envVars/tab}
+\renewcommand{\figdir}{appendix/envVars/envVars/fig}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Linux} \label{sec:appendix:envVars:linux}
+
+\begin{enumerate}
+  \item Open the shell initialization file in your home directory. On an Ubuntu system, this is \par \hspace{5mm} \verb!/home/user_name/.bashrc! \par Note that files whose names start with a dot are typically hidden.
+  \item To set a new variable, add a line like \par \hspace{5mm} \verb!export myVar=value! \par to the file. Don't use spaces before/after the '=' character.
+  \item Save the file.
+\end{enumerate}
+
+To check your edits, open a \textbf{NEW} shell and try the following:
+\begin{itemize}
+  \item Enter \verb!echo $myVar! to display variable \verb!myVar!.
+  \item Alternatively, enter the \verb!env! command to display all active variables.
+\end{itemize}
+
+In some situation it may be useful to update the \verb!PATH! environment variable. The contents of this variable determines where the operation system searches for executable files. In order to add a path name to the \verb!PATH! variable, append a line like \verb!export PATH=$PATH:xxx! to the shell initialization file (see above). The colon is used to separate the added value (\verb!xxx! in this example) from the existing ones.
+
+Note that the value assigned to the \verb!PATH! variable may contain references to other environment variables.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Windows} \label{sec:appendix:envVars:windows}
+
+The following instructions should be applicable to most modern versions of Windows. The exact location of the dialog that allows for the manipulation of environment variables may vary, however.
+
+\begin{enumerate}
+  \item
+  \begin{itemize}
+    \item Windows XP: Click 'Start' $\rightarrow$ 'Control Panel', $\rightarrow$ 'Performance and Maintenance' $\rightarrow$ 'System'.
+    \item Windows 7: Click 'Start' $\rightarrow$ 'Control Panel', $\rightarrow$ 'System and Security' $\rightarrow$ 'System' $\rightarrow$ 'Advanced system settings'.
+  \end{itemize}
+  \item Go to the 'Advanced' tab and click 'Environment Variables'.
+  \item Locate the section with 'User variables'. These are the variables you can set/edit without administrator priviliges.
+  \item Click 'New' to add a new variable (or 'Edit' or 'Delete' to modify/delete existing ones).
+\end{enumerate}
+
+To check your edits, open a \textbf{NEW} shell and try the following:
+\begin{itemize}
+  \item Enter \lstinline!echo \%myVar\%! to display variable 'myVar'.
+  \item Alternatively, enter the \lstinline!set! command to display all active variables.
+\end{itemize}
+
+It is sometimes necessary to update the \verb!PATH! environment variable. The contents of this variable determines where Windows searches for executable files. An update is usually required when installing software which does not use the Windows registry. In such cases, you typically need to add the name of the directory where the newly installed executable(s) reside to the existing value of the \verb!PATH! variable. You best append the directory name at the very end of the using a semicolon as separator. 
+
+Consider the following example: If the \verb!PATH! variable already contains the string \verb!c:\program files\soft1! and you installed a software \verb!xy! with the executable(s) in \verb!f:\myPrograms!, the contents of your updated \verb!PATH! variable should be \verb!c:\program files\soft1; f:\myPrograms!.
+
+Note that the value assigned to the \verb!PATH! variable may contain references to other environment variables. This is restricted to variabes of the same category, however, \ie{} you cannot mix system-variables and user-variables.

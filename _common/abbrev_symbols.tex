@@ -1,0 +1,162 @@
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% HYDRO-METEOROLOGICAL VARIABLES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Basic meteorological variables
+\newcommand{\precipIntensity}{\ensuremath{PI}}
+\newcommand{\windspeed}{\ensuremath{WS}}
+\newcommand{\airtemp}{\ensuremath{TA}}
+\newcommand{\airPressure}{\ensuremath{PA}}
+\newcommand{\relHumidity}{\ensuremath{RH}}
+\newcommand{\solarRadiation}{\ensuremath{SR}}
+
+% Variables related to moisture / humidity
+\newcommand{\specHumidity}{\ensuremath{q}}
+\newcommand{\specHumiditySurface}{\ensuremath{q_s}}
+\newcommand{\vaporPressure}{\ensuremath{e}}
+\newcommand{\vaporPressureSurface}{\ensuremath{e_s}}
+\newcommand{\satVaporPressure}{\ensuremath{E}}
+\newcommand{\satVaporPressureIce}{\ensuremath{E_i}}
+\newcommand{\satVaporPressureWater}{\ensuremath{E_w}}
+
+% Other meteorological variables
+\newcommand{\cloudFraction}{\ensuremath{FC}}
+\newcommand{\dewpointTemperature}{\ensuremath{T_{dew}}}
+
+% Common (unspecific) hydrometeorological variables
+\newcommand{\temperature}{\ensuremath{T}}
+
+% Snow variables
+\newcommand{\snowWaterEquivalent}{\ensuremath{SWE}}
+\newcommand{\snowHeight}{\ensuremath{SH}}
+\newcommand{\snowEnergyContent}{\ensuremath{SEC}}
+\newcommand{\snowTemperature}{\ensuremath{T_s}}
+\newcommand{\snowSurfaceTemperature}{\ensuremath{T_{ss}}}
+\newcommand{\snowFractionLiquid}{\ensuremath{SLF}}
+\newcommand{\snowRelSaturation}{\ensuremath{RSS}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% HYDRO-METEOROLOGICAL PROCESS RATES AND RELATED CONVERSION FACTORS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Energy fluxes
+\newcommand{\netRadiationShort}{\ensuremath{R_{netS}}}
+\newcommand{\netRadiationLong}{\ensuremath{R_{netL}}}
+\newcommand{\heatfluxSens}{\ensuremath{R_{sens}}}
+\newcommand{\heatfluxSoil}{\ensuremath{R_{soil}}}
+
+\newcommand{\radLongwaveOut}{\ensuremath{R_{outL}}}
+\newcommand{\radLongwaveIn}{\ensuremath{R_{inL}}}
+\newcommand{\radLongwaveInClearsky}{\ensuremath{R_{inL,cs}}}
+\newcommand{\radLongwaveInClouds}{\ensuremath{R_{inL,cl}}}
+
+\newcommand{\radShortwaveIn}{\ensuremath{R_{inS}}}
+
+% Mass fluxes
+\newcommand{\massfluxPrec}{\ensuremath{M_{prec}}}
+\newcommand{\massfluxSubl}{\ensuremath{M_{subl}}}
+\newcommand{\massfluxFlow}{\ensuremath{M_{flow}}}
+
+% Others
+\newcommand{\albedoChangeRate}{\ensuremath{G_{alb}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% PHYSICAL CONSTANTS AND CONCEPTUAL PARAMETERS USED IN HYDRO-METEOROLOGY
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Densities
+\newcommand{\densityWater}{\ensuremath{\rho_{w}}}
+\newcommand{\densityIce}{\ensuremath{\rho_{i}}}
+\newcommand{\densityAir}{\ensuremath{\rho_{a}}}
+\newcommand{\densitySnow}{\ensuremath{\rho_{snow}}}
+\newcommand{\densitySnowDry}{\ensuremath{\rho_{snow,dry}}}
+\newcommand{\densitySoil}{\ensuremath{\rho_s}}
+
+% Specific heat capacities
+\newcommand{\specHeatWater}{\ensuremath{C_{wat}}}
+\newcommand{\specHeatIce}{\ensuremath{C_{ice}}}
+\newcommand{\specHeatAir}{\ensuremath{C_{air}}}
+\newcommand{\specHeatSoil}{\ensuremath{C_s}}
+
+% Latent heats
+\newcommand{\evapHeatWater}{\ensuremath{E_{wat}}}
+\newcommand{\evapHeatWaterZero}{\ensuremath{E_{wat,0}}}
+\newcommand{\fusionHeatIce}{\ensuremath{H_{ice}}}
+\newcommand{\sublimHeatIce}{\ensuremath{E_{ice}}}
+
+% Radiation
+\newcommand{\snowAlbedo}{\ensuremath{AS}}
+\newcommand{\snowAlbedoMin}{\ensuremath{AS_{min}}}
+\newcommand{\snowAlbedoMax}{\ensuremath{AS_{max}}}
+\newcommand{\snowAlbedoRng}{\ensuremath{AS_{rng}}}
+
+\newcommand{\stefanBoltzmann}{\ensuremath{\sigma}}
+\newcommand{\emissivity}{\ensuremath{\varepsilon}}
+
+
+% Stoichiometry factors and functions used in the snow model
+\newcommand{\stoifacPrecMassToEnergy}{\ensuremath{f_{prec}}}
+\newcommand{\stoifacSublMassToEnergy}{\ensuremath{f_{subl}}}
+\newcommand{\stoifacFlowMassToEnergy}{\ensuremath{f_{flow}}}
+
+% Various parameters of the snow model
+\newcommand{\turbTransCoeff}{\ensuremath{D}}
+\newcommand{\airtempRainSnow}{\ensuremath{T_{crit}}}
+\newcommand{\soilInteractionDepth}{\ensuremath{D_s}}
+\newcommand{\snowRelCapRetent}{\ensuremath{SCR}}
+\newcommand{\snowSatHydrCond}{\ensuremath{k_{sat,snow}}}
+\newcommand{\snowAlbedoDecrConst}{\ensuremath{k_{AS}}}
+\newcommand{\leafAreaIndexFullShadow}{\ensuremath{LAI_{r0}}}
+
+% Evapotranspiration
+\newcommand{\etPot}{\ensuremath{et_{pot}}}
+\newcommand{\etReal}{\ensuremath{et_{real}}}
+\newcommand{\leafAreaIndex}{\ensuremath{LAI}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CONSTANTS AND VARIABLES RELATED TO RUNOFF GENERATION AND -CONCENTRATION
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\soilWaterContent}{\ensuremath{\theta}}
+\newcommand{\soilWaterContentMax}{\ensuremath{\theta_{max}}}
+
+\newcommand{\relSat}{\ensuremath{S}}
+\newcommand{\relSatInter}{\ensuremath{S_{int}}}
+\newcommand{\relSatBase}{\ensuremath{S_{base}}}
+
+
+\newcommand{\heightRunoffDirect}{\ensuremath{h_{d}}}
+
+\newcommand{\rateRunoffSurf}{\ensuremath{r_{surf}}}
+\newcommand{\rateRunoffPref}{\ensuremath{r_{pref}}}
+\newcommand{\rateRunoffInter}{\ensuremath{r_{int}}}
+\newcommand{\rateRunoffBase}{\ensuremath{r_{base}}}
+\newcommand{\rateEvapotransp}{\ensuremath{r_{evap}}}
+\newcommand{\rateSnowMelt}{\ensuremath{r_{melt}}}
+
+\newcommand{\soilDepth}{\ensuremath{D}}
+\newcommand{\satFrac}{\ensuremath{f_{sat}}}
+\newcommand{\expSatFrac}{\ensuremath{{\beta}}}
+
+\newcommand{\thresholdSurf}{\ensuremath{{thr_{surf}}}}
+
+\newcommand{\rateWaterSupply}{\ensuremath{WS}}
+
+\newcommand{\expInter}{\ensuremath{{E_{int}}}}
+\newcommand{\expBase}{\ensuremath{{E_{base}}}}
+
+\newcommand{\facInter}{\ensuremath{{b_{int}}}}
+\newcommand{\facBase}{\ensuremath{{b_{base}}}}
+
+\newcommand{\strSurf}{\ensuremath{{S_{surf}}}}
+\newcommand{\strPref}{\ensuremath{{S_{pref}}}}
+\newcommand{\strInter}{\ensuremath{{S_{inter}}}}
+\newcommand{\strBase}{\ensuremath{{S_{base}}}}
+
+\newcommand{\concTimeIndex}{\ensuremath{{CTI}}}
+
+\newcommand{\satHydrCond}{\ensuremath{k_{f}}}
+

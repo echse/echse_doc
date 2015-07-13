@@ -1,0 +1,10 @@
+# Declaration of a
+# linear reservoir class
+
+type	name
+
+stateScal	v
+paramNum	k
+inputSim	q_in
+output	q_ex
+

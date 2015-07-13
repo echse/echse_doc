@@ -1,0 +1,13 @@
+\begin{shaded}
+\begin{verbatim}
+
+# Mandatory parameters
+first         2000-01-01 01:00:00
+final         2000-01-01 01:00:00
+dt_seconds    3600
+
+# Optional information (example)
+system        UTC
+
+\end{verbatim}
+\end{shaded}

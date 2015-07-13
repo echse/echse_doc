@@ -1,0 +1,9 @@
+# Selection of for certain variables and objects for time series output
+
+object     variable     digits
+
+lake_1     waterlevel   2
+lake_1     outflow      3
+lake_1     temperature  0
+lake_2     temperature  0
+

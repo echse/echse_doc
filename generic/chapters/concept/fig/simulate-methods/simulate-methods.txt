@@ -1,0 +1,22 @@
+
+// Abstract base class (generic object class)
+class abstractObject {
+  // The virtual 'simulate' method remains unimplemented here 
+  virtual void simulate(const unsigned int delta_t)= 0;
+  // ... more data/function members ...
+};
+
+// A 'reservoir' class  (child of 'abstractObject')
+class object_reservoir: public abstractObject {
+  void simulate(const unsigned int delta_t) {
+    // ... Reservoir-specific implementation of 'simulate' ...
+  }
+};
+
+// A 'catchment' class  (child of 'abstractObject')
+class object_catchment: public abstractObject {
+  void simulate(const unsigned int delta_t) {
+    // ... Catchment-specific implementation of 'simulate' ...
+  }
+};
+

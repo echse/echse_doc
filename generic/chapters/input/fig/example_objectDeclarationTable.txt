@@ -1,0 +1,9 @@
+# Simple model with four objects and two classes (object groups)
+
+object      objectGroup
+
+Rhine       basin
+Constance   gage
+Danube      basin
+Vienna      gage       
+

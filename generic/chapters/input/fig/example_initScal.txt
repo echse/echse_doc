@@ -1,0 +1,9 @@
+# Initial values of all objects' scalar state variables
+
+object        variable    value
+
+reservoir_A   storage     3.e09
+reservoir_A   waterlevel  255.8
+catchment_X   snowheight  0.
+catchment_X   soilmoist   .23
+

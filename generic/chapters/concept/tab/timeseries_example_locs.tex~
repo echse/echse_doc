@@ -1,0 +1,7 @@
+
+\hrule \vspace{2mm}
+\begin{verbatim}
+# Location table
+id   x   y   z 
+\end{verbatim}
+\vspace{2mm} \hrule

@@ -1,0 +1,22 @@
+\usepackage[textfont={small,sl},labelfont={small,bf,sl},indention=0cm,singlelinecheck=false]{caption}
+\captionsetup[figure]{position=bottom}
+\captionsetup[table]{position=top}
+
+%% Here it is: the code that adjusts justification and spacing around caption.
+%% http://www.texnik.de/floats/caption.phtml
+%\makeatletter
+%% This does spacing around caption.
+%\setlength{\abovecaptionskip}{0.3cm}
+%\setlength{\belowcaptionskip}{0.3cm}
+%% This does justification (left) of caption.
+%\long\def\@makecaption#1#2{%
+%  \vskip\abovecaptionskip
+%  \sbox\@tempboxa{#1: #2}%
+%  \ifdim \wd\@tempboxa >\hsize
+%    #1: #2\par
+%  \else
+%    \global \@minipagefalse
+%    \hb@xt@\hsize{\box\@tempboxa\hfil}%
+%  \fi
+%  \vskip\belowcaptionskip}
+%\makeatother

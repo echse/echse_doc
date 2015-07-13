@@ -1,0 +1,28 @@
+\chapter{Data types}  \label{app:datatypes}
+\renewcommand{\tabdir}{appendix/datatypes/tab}
+\renewcommand{\figdir}{appendix/datatypes/fig}
+
+\section{Was ist der geeignete Array-Typ für die numerischen Rechnungen?}
+
+Ausführungszeiten wurden mit unterschiedlichen Typen von Array getestet (verwendeter Testcode s.u.). Ergebnisse siehe \tabref{tab:arraytest}.
+
+\begin{table*}[htbp]
+  \caption{Mittlere Ausführungszeiten der Funktion in Sekunden bei verschiedenen
+Compiler-Einstellungen (gcc (Ubuntu 4.4.1-4ubuntu9) 4.4.1). \label{tab:arraytest}}
+  \input{\tabdir/arraytest_result}
+\end{table*}
+
+Fazit (für das getestete Beispiel):
+\begin{itemize}
+\item Bei Optimierung mit -O2 oder -O4 sind die Laufzeitunterschiede
+  vernachlässigbar. Das einfachere Handling dürfte hier für die Ver-
+  wendung des Typs valarray sprechen.
+\item Wenn keine Optimierung eingeschaltet ist oder nur -O gesetzt ist, sind die
+  C-arrays am effizientesten. Die Verwendung von valarray mit slices ist
+  deutlich langsamer als die andern Varianten.
+\end{itemize}
+
+\begin{shaded}
+  \scriptsize
+  \lstinputlisting[style=c++]{\figdir/arraytest.cpp}
+\end{shaded}

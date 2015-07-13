@@ -1,0 +1,56 @@
+\chapter{User guidelines} \label{chap:guidelines}
+\renewcommand{\tabdir}{chapters/guidelines/tab}
+\renewcommand{\figdir}{chapters/guidelines/fig}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Model discretization} \label{sec:guidelines-discretization}
+
+Often, alternative options of discretizing a real-world system do exist. Each alternative usually comes with specific pros and cons. Depending in the intended application of the model, a particular option may be more or less appropriate (or convienient to use). Basic aspects of proper model discretization are discussed in the subsequent sections \secref{sec:guidelines-discretization-basic}--\ref{sec:guidelines-discretization-sub}.
+
+\subsection{Basic rule} \label{sec:guidelines-discretization-basic}
+
+The most basic rule is this: If two objects are charavcterized by different sets of state variables, \ie{} the names of the state variables are not the same, the two objects belong to different classes.
+
+\subsection{Sub-discretization} \label{sec:guidelines-discretization-sub}
+
+Real-world objects can (or must be) often further discretized into sub-units. This is usually the case, when the object's state variables are subject to spatially variability. For example, a larger catchment can be broken into sub-catchments, that differ with respect to certain properties (proportion of forest, soil type, etc.). In such situations one has to decide whether the sub-discretization should implemented
+\begin{itemize}
+  \item within the object, or
+  \item by splitting an object into multiple separate objects.
+\end{itemize}
+
+Such a decision should be made based on the guidelines presented below.
+
+\subsubsection{Dynamic sub-discretization}
+If the sub-discretization (\ie{} the number of spatial sub-units, for example) is time-variable, one must use vector-valued state variables (see \secref{sec:concept-classFeatures-states}). This is due to the fact that the size (\ie{} the number of elements) of the vectors is allowed to change during the simulation period. A dynamic sub-discretization may be necessary when modeling the travelling of a flood wave in a homogeneous river reach represented by a cascade of linear reservoirs. In such a model, the appropriate number of linear reservoirs typically depends on the flow rate.
+
+The approach of using vector-valued state variables only introduces additional state variables (but not parameters, etc.). Note: Pragmatically, vector state variables may also be 'misused' as scalar parameters, if parameter values are variable among the sub-units. This is, however, not efficient, because the info on parameters then (unnecessarily) appears in output files.
+
+\subsubsection{Static Sub-Discretization}
+If, in contrast to the situation discussed above, the number of sub-units is constant over the simulation period, several alternatives do exist:
+
+\paragraph{State variables only} If the sub-discretization is limited to state variables (\ie{} all sub-units have common parameters and external inputs), one may use vector-valued state variables. The size of the vectors is simply held constant (by not changing it). Note: Pragmatically, vector state variables may also be 'misused' as scalar parameters, if parameter values are variable among the sub-units. This is, however, not efficient, because the info on parameters then (unnecessarily) appears in output files.
+
+\paragraph{Fixed number of sub-units} If the number of sub-units is the same for all objects of a class, one should use multiple scalar state variables (and/or parameters). Example: A catchment class, with a fixed number of land-use classes (such as 'forest', 'water', 'urban', 'other').
+
+\paragraph{Remaining cases} If (a) the sub-discretization is not limited to state variables (\ie{} parameters are variable as well) and (b) the number of required sub-units is specific to individual objects, one should treat the sub-units as objects of a separate (additional) class and define appropriate interactions between the objects of the original and new class. Example: If the number of (relevant) land-uses in a catchment varies from one catchment to the next (and using a fixed number seems inefficient), one may introduce a class new 'landUseUnit'. The sub-units are then implemented as objects of that new class, each being linked to the corresponding catchment object.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Optimizing for speed} \label{sec:guidelines-speedOptim}
+
+\subsection{Parallel processing} \label{sec:guidelines-speedOptim-parallel}
+The \software{echse} software comes with built-in support for \emph{shared-memory} parallel computing. This is implemented using OpenMP (\url{http://openmp.org/}) which is supported by many modern compilers.
+Parallel processing can be enabled/disabled by the user via a model's configuration data (see \tabref{tab:config-compuational}).
+
+Please note that \emph{shared-memory} parallel computing only works on systems which are capable of running a \emph{single process} as \emph{multiple threads}. Please note, however, that the attempt to use multi-threading does not necessarily increase the performance, \ie{} save computation time. In fact, depending on computer architecture (hardware) and the specific model, the model may \emph{slow down} unexpectedly although it should become faster from theory. A possible reasons for this undesired behaviour might be that the overhead for the creation of multiple threads is higher than the actual gain from the parallel simulation. Another possible cause might be that, although the machine supports multiple threads, these threads share a limited ressource (like a floating-point arithmetic module, for example). Then, the multiple threads run sequentially in fact.
+
+Present experience has shown that parallel processing is effective on a true multi-processor machine, \ie{} a machine with more than one physical CPU\footnote{Dell machine with 4 CPUs of type Intel Core i7-2620M, each of which with 2 kernels, running 32 bit Ubuntu 12.04 LTS}. It was found to be counterproductive, however, on multi-kernel architectures where all kernels are part of one single CPU\footnote{Several dual-core and quad-core machines running Windows 7}.
+
+Thus, it is recommended to always empirically determine the gain in computation speed (or slow down). This is easily done by inspecting the computation time of a particular simulation with multi-threading being turned on and off, respectively (see \tabref{tab:config-compuational}).
+  
+\subsection{Miscellaneous} \label{sec:guidelines-speedOptim-misc}
+Declaring local variables of the simulate-Method as static does not have an effect (at least when compiling with gcc and optimization). It seems that the optimization performed by the compiler prevents the repeated allocation of memory on every call of the simulate-method.

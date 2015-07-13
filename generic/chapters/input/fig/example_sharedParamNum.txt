@@ -1,0 +1,7 @@
+# Scalar parameters shared by all objects of a particular class
+
+parameter      value
+
+freezingPoint  0.0
+density        1.0
+

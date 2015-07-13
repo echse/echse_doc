@@ -1,0 +1,47 @@
+\begin{verbatim}
+
+# Mandatory
+first       2000-01-01 01:00:00
+final       2000-01-01 01:00:00
+dt_seconds  3600
+# Optional 
+system      UTC
+
+
+id   x   y   z
+  
+
+
+ 
+Loc_1    Loc_2    Loc_3    ...   Loc_n
+  1.0      1.2      3.3    ...    -1.2
+  1.0      1.2      3.3    ...    -1.2
+  ...      ...      ...    ...     ...
+  1.0      1.2      3.3    ...    -1.2
+  1.0      1.2      3.3    ...    -1.2
+
+
+# 1st row (location IDs)
+Loc_1
+Loc_2
+Loc_3
+...
+Loc_n
+# 2nd row (data for 1st time step)
+1.0
+1.2
+3.3
+...
+-1.2
+# 3rd row (data for 2nd time step)
+1.0
+1.2
+3.3
+...
+-1.2
+
+
+
+
+\end{verbatim}
+

@@ -1,0 +1,81 @@
+\chapter{Code generation}  \label{app:codegen}
+\renewcommand{\tabdir}{appendix/codegen/tab}
+\renewcommand{\figdir}{appendix/codegen/fig}
+
+\section{Problembeschreibung}
+Das zu entwickelnde Simulationsmodell besteht aus miteinander vernetzten Elementen. Der Zustand jedes Element wird durch einige Zustandsvariablen beschrieben. Die Aufgabe des Modells ist es, die Entwicklung der Zustandsvariablen in allen Elementen über eine Folge von Zeitschritten zu berechnen. Dabei gibt es verschiedene (u.U. viele) Element-Typen (Element-Klassen), die sich hinsichtlich des Sets von Zustandsvariablen unterscheiden.
+
+Die zeitliche Änderung jeder Zustandsvariable einer Element-Klasse wird durch eine gewöhnliche Differentialgleichung (DGL) beschrieben. Die rechte Seite dieser DGL kann potentiell enthalten:
+\begin{itemize}
+\item den Momentanwert der Zustandsvariable (z. B. $dx/dt = a * x$),
+\item den Momentanwert einer anderen Zustandsvariable des gleichen Elements,
+\item Parameter (das können eche Konstanten aber z. B. auch Zuständen in anderen Elementen des Systems sein).
+\end{itemize}
+
+Der Einfachheit halber, betrachten wir im Folgenden nur die Parameter. Da die Anzahl der Parameter groß sein kann, bietet es sich an, diese in Arrays zu speichern. Die Berechnungen, welche auf die Parameterwerte zurückgreifen, finden innerhalb von Funktionen statt. Die Parameter müssen folglich an Funktionen übergeben werden. Da die Funktionen universell verwendbar sein sollen - also mit einer beliebigen Anzahl von Parametern umgehen können müssen - kommt eine übergabe der Parameter als Einzelwerte nicht in Frage (man bräuchte für jede denkbare Anzahl von Parametern eine eigene Funktion und die Argumentlisten können unhandlich lang sein). Auch deshalb macht die Speicherung der Parameterwerte in Arrays Sinn, weil sie so "als Ganzes" an Funktionen (mit einer einzigen Schnittstelle) übergeben werden können.
+
+In den folgenden Beispielen wird angenommen, dass es nur zwei Parameter 'a' und 'b' mit den Werten a=2.0 und b=5.0 gibt, die innerhalb einer Funktion 'fun' multipliziert werden. Das Array, in dem die Parameter 'a' und 'b' gespeichert werden sollen sei 'params'.
+
+\section{Lösung mit simplem Array}
+Die einfachste Lösung unter Verwendung eines simplen Arrays könnte wie folgt aussehen:
+
+\begin{shaded}
+  \scriptsize
+  \lstinputlisting[style=c++]{\figdir/simplearray.cpp}
+\end{shaded}
+
+Der offensichtliche Nachteil ist, dass die Ausdrücke in der Funktion schwer lesbar sind, da (ohne Kommentare) nicht offensichtlich ist, welcher Parameter in welchem Element des Arrays gespeichert ist. Für die Lesbarkeit (und Fehlersuche) wäre die Verwendung assoziativer Namen für die involvierten Parameter angebracht. Außerdem müsste an einer entfernten Stelle des Codes (hier in main()) sichergestellt werden, dass bei der Belegung des Arrays auch tatsächlich der Wert für 'a' dem Element 0 und der Wert für 'b' dem Element 1 zugewiesen wird. Diese Abhängigkeit entfernter Codeteile sollte aber vermieden werden, weil sich bei Änderungen an einer Stelle des Codes leicht Inkonsistenzen einschleichen können.
+
+Es existieren verschiedene alternative Lösungen, die alle Vor- und Nachteile haben.
+
+\section{Lösung mit Zeigern auf Array-Elemente}
+Bei dieser Lösung wird für jeden Parameter ein Pointer mit einen assoziativen Namen erzeugt, welcher auf das Array-Element mit dem zugeordneten Wert verweist. Das könnte aussehen, wie im Folgenden gezeigt:
+
+\begin{shaded}
+  \scriptsize
+  \lstinputlisting[style=c++]{\figdir/pointers.cpp}
+\end{shaded}
+
+Der Ausdruck in der Funktion ist nun etwas lesbarer geworden (vom Stern-Operator für die Dereferenzierung der Zeiger mal abgesehen). Allerdings gibt es nun einen gewissen Overhead, im Vergleich zum Beispiel, wo direkt über den Feldindex auf die Elemente des Arrays zugegriffen wird, da die Zeiger bei jedem Funktionsaufruf gesetzt werden. Zudem besteht weiterhin das Problem, dass an einer entfernten Stelle des Codes (hier in main()) sichergestellt werden, dass die Belegung des Arrays so erfolgt, dass der Wert für 'a' dem Element 0 und der Wert für 'b' dem Element 1 zugewiesen wird.
+
+\section{Lösung mit assoziativen Arrays}
+Eine bequeme und sichere Lösung des Problems scheinen assoziative Arrays (Klasse 'maps' aus der STL) zu bieten. Man könnte z.B. eine map mit den 2 Parametern 'a' und 'b' definieren und die Elemente innerhalb von Ausdrückem dann mit Namen ansprechen:
+
+\begin{shaded}
+  \scriptsize
+  \lstinputlisting[style=c++]{\figdir/map.cpp}
+\end{shaded}
+
+In Sachen Lesbarkeit und Sicherheit sicher eine gute Lösung. Allerdings müssen nun bei jedem Aufruf der Funktion die Parameterwerte anhand der Schlüssel gesucht werden. Mit Blick auf die Performance ist das höchstens für sehr einfache Fälle mit wenigen Parametern und wenigen Funktionsauswertungen praktikabel. Wenn die Anzahl der Parameter groß wird und die Funktion sehr häufig aufgerufen wird, dürfte der Aufwand für die Entschlüsselung nicht mehr tolerierbar sein. Die Tasache, dass die Parameter an die Funktion nicht als const übergeben werden können, ist im Hinblick auf die Sicherheit etwas unschön.
+
+\section{Lösung durch mehrstufige Übersetzung (Code-Generierung)}
+Durch eine mehrstufige Übersetzung (Code-Generierung) lassen sich mehrere Probleme elegant lösen. Die Lesbarkeit des Codes während der Modellentwicklung ist genauso gewährleistet wie der sichere und effiziente Datenzugriff. Eine mögliche Lösung sieht so aus:
+
+Zunächst wird die Funktion, welche die Parameter verwendet, in einer Art Meta-Sprache definiert. Dabei wird für die Parameter eine spezielle Bezeichner-Konvention eingeführt. Sie können z. B. einen Prefix und/oder Suffix tragen, der für Bezeichnern eigentlich unzulässig ist:
+
+\begin{shaded}
+  \scriptsize
+  \lstinputlisting[style=c++]{\figdir/codegen-input.cpp}
+\end{shaded}
+
+Nun wird diese Funktionsdefinition mit einem Hilfsprogramm (Parser) vorübersetzt. Das Hilfsprogramm hat die Aufgabe, die Parameter zu erkennen und eine (duplikatfreie) Liste mit ihren Namen zu erstellen. Als Ausgabe erzeugt das Programm folgenden C++ Code, der z.B. in einer Datei 'params.h' gespeichert werden könnte:
+\begin{enumerate}
+\item die Deklaration eines Arrays mit den Parameternamen,
+\item die Funktionsdefinition, wobei die mit Pre- u./o. Suffix versehenen Parameternamen durch Verweise auf die Elemente eines Arrays ersetzt wurden, welches zur Laufzeit die Werte der Parameter enthält. Dieses Array hat natürlich die gleiche Länge wie das Array der Parameternamen.
+\end{enumerate}
+
+Aus Gründen der Übersichtlichkeit und Sicherheit bei der Verwendung werden Namen und Werte der Parameter am besten in einer Struktur zusammen gehalten. Die Ausgabe des Programm dürfte dann wie folgt aussehen:
+
+\begin{shaded}
+  \scriptsize
+  \lstinputlisting[style=c++]{\figdir/codegen-output.cpp}
+\end{shaded}
+
+Dieser generierte Code kann dann (z. B. mittels include) eingebunden werden, wie es nachfolgend gezeigt ist. Hier wird der Bequemlichkeit angenommen, dass die Parameterwerte in einer Map vorliegen (z. B. nachdem sie aus einer Datei gelesen wurden). Sie werden dann einmalig auf sichere Art und Weise in die Struktur übertragen. ACHTUNG: Die Art der struct-Initialisierung erfordert unter gcc derzeit die Option -std=c++0x!
+
+\begin{shaded}
+  \scriptsize
+  \lstinputlisting[style=c++]{\figdir/codegen-usage.cpp}
+\end{shaded}
+
+Hier sollte nach einer Aktualisierung des Abschnittes ggf. noch das Hilfsprogramm erläutert werden.

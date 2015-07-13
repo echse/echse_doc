@@ -1,0 +1,41 @@
+\begin{verbatim}
+
+<time>
+  first= 2000-01-01 01:00:00
+  final= 2000-01-01 01:00:00
+  increment= 3600
+  system= UTC
+</time>
+
+id   x   y   z   xy_system   z_system
+  
+
+ 
+=========================================
+Loc_1    Loc_2    Loc_3    ...   Loc_n
+  1.0      1.2      3.3    ...    -1.2
+  1.0      1.2      3.3    ...    -1.2
+  ...      ...      ...    ...     ...
+  1.0      1.2      3.3    ...    -1.2
+  1.0      1.2      3.3    ...    -1.2
+=========================================
+
+
+# 1st row (location IDs)
+Loc_1
+Loc_2
+Loc_3
+...
+Loc_n
+# 2nd row (data for 1st 
+1.0
+1.2
+3.3
+...
+-1.2
+
+
+
+
+\end{verbatim}
+

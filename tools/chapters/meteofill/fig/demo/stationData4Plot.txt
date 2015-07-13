@@ -1,0 +1,7 @@
+id	x	y	z	temp
+dd_klotzsche	4623183	5667440	227	-5.9
+dd_hosterwitz	4629789	5655359	114	-5.9
+dd_strehlen	4623996	5652991	119	-6.2
+dippoldiswalde	4620226	5644000	365	-9.2
+zinnwald	4623539	5622933	877	-13.2
+

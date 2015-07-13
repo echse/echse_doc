@@ -1,0 +1,12 @@
+# Initial values of all objects' vector state variables
+
+object     variable    index   value
+
+tree1      fruitSize   0       92.
+tree1      fruitSize   1       88.
+tree1      fruitSize   2       90.
+# ... more data ...
+tree782    fruitSize   0       101.
+tree782    fruitSize   1       96.
+# ... more data ...
+

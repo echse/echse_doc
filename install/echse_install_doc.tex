@@ -1,0 +1,233 @@
+\documentclass[a4paper,twocolumn,10pt,fleqn]{book}
+\usepackage[american,ngerman]{babel}     %american / ngerman
+\usepackage[T1]{fontenc}       %Silbentrennung
+\usepackage[utf8]{inputenc}
+%\usepackage[latin1]{inputenc}  %Direkteingabe von Umlauten
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{colortbl}
+\usepackage{longtable}
+\usepackage{graphicx}
+\usepackage{times}       %Erzwingt Typ 1 Schrift (skalierbar, gutes pdf-Output)
+\usepackage[round,colon,authoryear]{natbib}      %Fuer Zitate mit \citep, \citet
+\usepackage[fleqn]{amsmath}  % für \align-environment (ausgerichtete Gleichungen)
+\usepackage{wasysym}  % common symbols (math + text mode), e.g. \permil
+\usepackage{fancyhdr} % Customized header/footer
+\usepackage{titling}
+\usepackage{fink}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{framed}
+\usepackage{amsmath}
+\usepackage{placeins}
+\usepackage{makeidx}
+\usepackage{rotfloat}
+\usepackage[hyphens,obeyspaces]{url}
+
+
+%Unterdrueckung von Hurenkindern und Schusterjungen
+\clubpenalty = 10000
+\widowpenalty = 10000 \displaywidowpenalty = 10000
+
+% Vertiacal spacing between multi-line equations (e.g. in align env.)
+\setlength{\jot}{11pt}
+
+\def\arraystretch{1.2}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%% DEFINITIONS %%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input{../../_common/options-pdfconvert}
+\input{../../_common/options-captions}
+\input{../../_common/options-crossref}
+\input{../../_common/options-lists}
+\input{../../_common/options-inputlistings.tex}
+\input{../../_common/options-hyphen}
+\input{../../_common/formats}
+\input{../../_common/abbrev_misc}
+\input{../../_common/abbrev_symbols}
+\input{../../_common/abbrev_units}
+\input{../../_common/colors}
+
+\addtolength{\evensidemargin}{-1cm}
+\addtolength{\oddsidemargin}{+1cm}
+
+\setcounter{tocdepth}{2}     % Numbers up to 0.0.0 in TOC     (chapter= 0, section= 1, subsection= 2 ...)
+\setcounter{secnumdepth}{3}  % Numbers up to 0.0.0.0 in text  (chapter= 0, section= 1, subsection= 2 ...)
+
+\arrayrulecolor{black}
+
+\makeindex
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%% TITLE PAGES %%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\selectlanguage{american}
+\pagestyle{empty}
+\onecolumn
+
+\begin{center}
+  \vspace*{5cm}
+  \LARGE
+  \textbf{Eco-Hydrological Simulation Environment \\ (\software{echse})} \\
+  \vspace*{1.2cm}
+  Installation and Administration Guide \\
+  \vspace*{2.0cm}
+  \includegraphics[width=0.1\textwidth,angle=270]{../../_common/fig/logo.eps}
+\end{center}
+
+\cleardoublepage
+
+\vspace*{12cm}
+\begin{tabular}{ll}
+Author      & David Kneis \\
+Affiliation & Institute of Earth and Environmental Sciences \\
+            & Hydrology \& Climatology Section, \\
+            & University of Potsdam, Germany \\
+Contact     & david.kneis [at] uni-potsdam.de \\
+            & \\
+Project     & PROGRESS \\
+Sub-project & D2.2 \\
+Funding     & German Ministry of Education and Research (BMBF) \\
+            & \\
+Last update & \today{} \\
+\end{tabular}
+
+\vspace*{2.0cm}
+\noindent Please help to improve this document by sending suggestions, corrections, wishes, and other useful feedback to the author (see above).
+
+\cleardoublepage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%% Page style   %%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% Begin Fancy Header Settings
+\pagestyle{fancy}                       % Sets fancy header and footer
+\fancyfoot{}                            % Delete current footer settings
+\renewcommand{\chaptermark}[1]{         % Lower Case Chapter marker style
+  \markboth{\chaptername\ \thechapter\ \hspace{0.5cm} #1}{}}
+\renewcommand{\sectionmark}[1]{         % Lower case Section marker style
+  \markright{\thesection\ \hspace{0.5cm} #1}}
+\fancyhead[LE,RO]{\bfseries\thepage}    % Page number (boldface) in left on even pages and right on odd pages
+\fancyhead[RE]{\bfseries\leftmark}      % Chapter in the right on even pages
+\fancyhead[LO]{\bfseries\rightmark}     % Section in the left on odd pages
+\renewcommand{\headrulewidth}{0.3pt}    % Width of head rule %%% Clear Header
+%% End Fancy Header Settings
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%% TOC          %%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Begin TOC Settings
+\pdfbookmark[1]{\contentsname}{toc}
+\fancyhead[LE,RO]{\bfseries\thepage}
+\fancyhead[RE]{\bfseries Contents}
+\fancyhead[LO]{\bfseries Contents}
+\tableofcontents
+%% End TOC Settings
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%% ABSTACTS %%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\onecolumn
+
+% English summary
+%\cleardoublepage
+%\fancyhead[LE,RO]{\bfseries\thepage}
+%\fancyhead[RE]{ }
+%\fancyhead[LO]{ }
+%\selectlanguage{american}
+%\input{abstracts/abstract-en}
+
+% German dummary
+%\cleardoublepage
+%\fancyhead[LE,RO]{\bfseries\thepage}
+%\fancyhead[RE]{ }
+%\fancyhead[LO]{ }
+%\selectlanguage{ngerman}
+%\input{abstracts/abstract-de}
+%\selectlanguage{american}
+%\cleardoublepage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%% THE CHAPTERS %%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\onecolumn
+
+% Reestablish header
+\fancyhead[LE,RO]{\bfseries\thepage}    % Page number (boldface) in left on even pages and right on odd pages
+\fancyhead[RE]{\bfseries\leftmark}      % Chapter in the right on even pages
+\fancyhead[LO]{\bfseries\rightmark}     % Section in the left on odd pages
+
+%%%%% Chapter sources
+\include{chapters/extSoft/extSoft}
+\include{chapters/install/install}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%% LISTS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\fancyhead[LE,RO]{\bfseries\thepage}
+\fancyhead[RE]{\bfseries List of figures}
+\fancyhead[LO]{\bfseries List of figures}
+\addcontentsline{toc}{chapter}{List of figures}
+\listoffigures
+
+\clearpage
+\fancyhead[LE,RO]{\bfseries\thepage}
+\fancyhead[RE]{\bfseries List of tables}
+\fancyhead[LO]{\bfseries List of tables}
+\addcontentsline{toc}{chapter}{List of tables}
+\listoftables
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%% BIBLIOGRAPHY %%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\clearpage
+
+\twocolumn
+
+\fancyhead[LE,RO]{\bfseries\thepage}
+\fancyhead[RE]{\bfseries Bibliography}
+\fancyhead[LO]{}
+\addcontentsline{toc}{chapter}{Bibliography}
+\bibliographystyle{../../_common/elsarticle-harv}
+\bibliography{/home/dkneis/literature/jabref/bib_hydrologicalModeling,/home/dkneis/literature/jabref/bib_diplomaAndDiss}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%% THE APPENDIX %%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\onecolumn
+
+\chaptermark{A}
+\clearpage
+\fancyhead[LE,RO]{\bfseries\thepage}
+\fancyhead[RE]{\bfseries Appendix}
+\fancyhead[LO]{}
+\addcontentsline{toc}{chapter}{Appendix}
+\appendix
+\input{appendix/envVars/envVars.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%% THE INDEX %%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\twocolumn
+
+\clearpage
+\fancyhead[LE,RO]{\bfseries\thepage}
+\fancyhead[RE]{\bfseries Index}
+\fancyhead[LO]{}
+\addcontentsline{toc}{chapter}{Index}
+\printindex
+
+\end{document}

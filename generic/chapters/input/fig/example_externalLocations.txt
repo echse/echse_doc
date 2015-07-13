@@ -1,0 +1,19 @@
+# External forcings: Assignment of locations for the 'tree example'
+
+object        variable   location   weight
+
+tree_berlin1  sun        Berlin     1.0
+tree_berlin2  sun        Berlin     1.0
+tree_berlin3  sun        Berlin     1.0
+tree_tokyo    sun        Tokyo      1.0
+tree_melbrn   sun        Melbourne  1.0
+
+tree_berlin1  rain       Moscow     0.3
+tree_berlin1  rain       Vienna     0.7
+tree_berlin2  rain       Moscow     0.3
+tree_berlin2  rain       Vienna     0.7
+tree_berlin3  rain       Moscow     0.3
+tree_berlin4  rain       Vienna     0.7
+tree_tokyo    rain       Tokyo      1.0
+tree_melbrn   rain       Tokyo      1.0
+

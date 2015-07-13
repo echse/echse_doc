@@ -1,0 +1,16 @@
+# Simple river system:
+#
+# spring1 --> reach1
+#               |
+#             junction --> reach3
+#               |
+# spring2 --> reach2
+
+targetObject  targetVariable  sourceObject  soureVariable  forwardType
+
+reach1        inflow          spring1       outflow        true
+reach2        inflow          spring2       outflow        true
+junction      inflow_1        reach1        outflow        true          
+junction      inflow_2        reach2        outflow        true          
+reach3        inflow          junction      outflow        true
+

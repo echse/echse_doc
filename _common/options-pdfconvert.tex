@@ -1,0 +1,18 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Optionen für die PDF-Erstellung 
+%
+% Achtung: Der Postprocessor dvips muss
+%   mit der Option -z ausgeführt werden.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[ps2pdf]{hyperref}
+\usepackage{breakurl}
+\definecolor{darkblue}{rgb}{0.2,0.2,0.8}
+\hypersetup{%
+colorlinks=true,        % Einfaerbung von Verknuepfungen
+linkcolor=darkblue,     %Farbe dokumentinterner Links
+citecolor=darkblue,     %Farbe dokumentinterner Links
+bookmarksopen=false,    % Anzeige aller Ebenen
+bookmarksnumbered=true, % Anzeige der Abschnittsnummern
+pdfstartpage={1},       % Startseite
+breaklinks=true
+}

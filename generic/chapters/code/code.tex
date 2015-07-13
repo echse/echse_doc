@@ -1,0 +1,27 @@
+\chapter{Source code (PRELIMINARY)} \label{chap:code}
+\renewcommand{\tabdir}{chapters/code/tab}
+\renewcommand{\figdir}{chapters/code/fig}
+
+\section{Programming language} \label{sec:code-language}
+
+Execution time is critical for many operatinal and scientific applications. Therefore, the use of a compiled language (like FORTRAN 95+ or C++) is preferred over the use of a interpreted language (like Java, Matlab, R, $\ldots$). C++ was selected as the language for implementing \software{echse} for the following reasons:
+
+\begin{itemize}
+  \item Execution speed of the compiled code.
+  \item Full support of object-oriented (OO) programming features.
+  \item A standard way of exception handling exists.
+  \item Availability of libraries.
+  \item Availability of free compilers for any platform (gcc).
+  \item Widespread use.
+\end{itemize}
+
+%The \software{echse}-code profits from an OO programming style, because it allows for
+%\begin{itemize}
+%  \item KAPSELUNG: Protection of an object's data against unallowed access.
+%  \item VERERBUNG: Handling of objects which differ in its data or methods by using the common base class. For example, a base class 'hydrologicElement' may be defined with the child classes 'lake' and 'watershed'. Say \emph{three} lakes and \emph{five} watersheds are instantiated during runtime. Because lakes and watersheds ar all 'hydrologic elements' (\ie{} they have a common base class) we can easily iterate over all \emph{eigth} objects. We call the common methods defined in the base classes, which are overloaded in the child classes.
+%\end{itemize}
+
+% Why using exceptions?
+%(1) Werden keine Exceptions verwendet (wie etwa in Fortran oder C), muss jede Methode einen Statuswert (z.B. integer) an die aufrufende Umgebung liefern. Dieser muss dann jeweils in der aufrufenden Umgebung kontrolliert werden. Unterbleibt die Kontrolle, verliert sich das Programm leicht in einem undeinierten Zustand. Werden dagegen Exceptions verwendet, ist ein definiertes Programmende garantiert, auch dann, wenn der Fehler nicht in der aufrufenden Einheit behandelt wird (was er aber sollte).
+%(2) Wird eine Exception ausgelöst, wird dynamisch alloziierter Speicher automatisch freigegeben.
+%(3) Mit Exceptions lässt sich relativ leicht ein traceback erstellen (geht aber auch ohne).

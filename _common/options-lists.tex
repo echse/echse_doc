@@ -1,0 +1,41 @@
+\newenvironment{enumeratePacked}{
+\begin{enumerate}
+  \setlength{\itemsep}{4pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+}{\end{enumerate}}
+
+\newenvironment{itemizePacked}{
+\begin{itemize}
+  \setlength{\itemsep}{4pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+}{\end{itemize}}
+
+\newenvironment{descriptionPacked}{
+\begin{description}
+  \setlength{\itemsep}{4pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+}{\end{description}}
+
+% A command to produce an emphasized header on a single line
+\newcommand{\desclisthead}[1]{\par\medskip\noindent\textit{\textbf{#1}}\\*\noindent}
+
+% Modifies the format of the label in description environments (boldface --> italic)
+\renewcommand{\descriptionlabel}[1]%
+         {\hspace{\labelsep}\textit{#1}}
+
+% Description env. with tt-Font label
+\newcommand\mydescriptionlabel[1]{\hspace{\labelsep}\texttt{#1}}
+\newenvironment{columndef}{%
+   \let\descriptionlabel\mydescriptionlabel
+   \description
+}{%
+   \enddescription
+}
+
+% An environment for the chapter introduction
+\newenvironment{chapterintro}{
+\begin{minipage}{0.75\textwidth}\slshape
+}{\upshape \end{minipage}\twocolumn}

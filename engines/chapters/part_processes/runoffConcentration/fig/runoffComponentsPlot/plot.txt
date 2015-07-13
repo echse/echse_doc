@@ -1,0 +1,9 @@
+file	colname	color	type	name	header	comment	nodata	factor	xcut
+
+gage_Kanta_baseInterPrefSurf.txt	qx_end	magenta  l b+i+p+s      TRUE # NA 1 TRUE
+gage_Kanta_baseInterPref.txt	qx_end	cyan  l b+i+p      TRUE # NA 1 TRUE
+gage_Kanta_baseInter.txt	qx_end	blue  l b+i      TRUE # NA 1 TRUE
+gage_Kanta_base.txt	qx_end	darkblue  l b      TRUE # NA 1 TRUE
+
+
+

@@ -1,0 +1,94 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% COLOR DEFINITIONS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\definecolor{black}{rgb}{0,0,0}
+\definecolor{darkgrey}{rgb}{0.2,0.2,0.2}
+\definecolor{darkblue}{rgb}{0,0,0.7}
+\definecolor{listnumbercolor}{rgb}{0.5,0.5,0.5}
+\definecolor{brown}{rgb}{0.5,0.2,0}
+\definecolor{magenta}{rgb}{0.7,0,0.4}
+
+\definecolor{lightyellow}{rgb}{1.,1.,0.75}
+\definecolor{lightblue}{rgb}{0.95,0.95,1}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% LANGUAGE DEFINITIONS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\lstdefinelanguage{txt}[]{}{%
+  morecomment=[l]{\#}
+}
+
+%\lstloadlanguages{R}
+\lstdefinelanguage{Renhanced}[]{R}{%
+  morekeywords={colMeans,colSums,data.frame,dyn.load,dyn.unload,%
+    in,is.na,is.null,is.finite,%
+    mapply,na.rm,read.table,rep,rowMeans,rowSums,%
+    which.max,which.min,write.table},
+  deletekeywords={by,case,dir,dt,col,data,file,model,offset,par,sample,t,time},
+  otherkeywords={!, \{, \}}, % Makes operators not keywords
+  alsoletter={_.\%},
+  alsoother={:\$},
+  emph=[1]{TRUE,FALSE,NULL,NA,INF},
+  morecomment=[is]{\#\#BeginHide}{\#\#EndHide}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% GENERIC STYLE DEFINITIONS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\lstdefinestyle{source}{extendedchars=true,
+  basicstyle=\color{black}\ttfamily\small,
+  commentstyle=\color{darkgrey}\textsl,
+  keywordstyle=\color{darkblue}\textbf,
+  stringstyle=\color{brown},
+  emphstyle=[1]\color{magenta},
+  showstringspaces=false,
+  framexleftmargin=0mm,
+  frame=shadowbox,
+  rulesepcolor=\color{darkgrey},
+  backgroundcolor=\color{lightblue},
+  rulecolor=\color{lightblue},
+  fillcolor=\color{lightblue}
+%  numbers=left,
+%  numberstyle=\color{darkgrey}\ttfamily\tiny,
+%  stepnumber=1,
+%  numbersep=3mm
+}
+
+\lstdefinestyle{data}{extendedchars=true,
+  basicstyle=\color{black}\ttfamily\small,
+  commentstyle=\color{darkgrey}\textsl,
+  keywordstyle=\color{darkblue}\textbf,
+  stringstyle=\color{brown},
+  emphstyle=[1]\color{magenta},
+  showstringspaces=false,
+  framexleftmargin=0mm,
+  frame=shadowbox,
+  rulesepcolor=\color{darkgrey},
+  backgroundcolor=\color{lightyellow},
+  rulecolor=\color{lightyellow},
+  fillcolor=\color{lightyellow}
+%  numbers=left,
+%  numberstyle=\color{darkgrey}\ttfamily\tiny,
+%  stepnumber=1,
+%  numbersep=3mm
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ACTUALLY USED STYLES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\lstdefinestyle{R}{language=Renhanced,style=source}
+\lstdefinestyle{r}{language=Renhanced,style=source}
+
+\lstdefinestyle{C++}{language=C++,style=source}
+\lstdefinestyle{c++}{language=C++,style=source}
+\lstdefinestyle{cpp}{language=C++,style=source}
+
+\lstdefinestyle{shell}{language=bash,style=source}
+
+\lstdefinestyle{txt}{language=txt,style=data}
+\lstdefinestyle{text}{language=txt,style=data}

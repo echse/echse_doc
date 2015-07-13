@@ -1,0 +1,51 @@
+\chapter{Model engine \software{hypsoRR}} \label{chap:hypsoRR}
+\renewcommand{\tabdir}{chapters/part_modelEngines/hypsoRR/tab}
+\renewcommand{\figdir}{chapters/part_modelEngines/hypsoRR/fig}
+
+\section{Basic facts}
+The \software{hypsoRR} model engine was designed for the purpose of flood forecasting, and the verification of ensemble-based flood forecasts in particular.
+\begin{itemize}
+  \item It is hydrologocal catchment model engine that simulates all major processes of the hydrological cycle.
+  \item It is a rather simple, conceptual model engine to allow for fast computations. This is important in operational applications, especially when dealing with ensembles.
+  \item The data requirements are adapted to the situation in Germany, where observation data for all major meteorological variables are typically available. However, the concept was also sucessfully applied to basins in Asia and Africa. The full set of variables is required only if snow accumulation/melt is relevant.
+  \item Many concepts are copied from LARSIM \citep{Ludwig2006} which is the hydrological model engine currently used for operational forecasting in SW Germany. \software{hypsoRR} can use most of LARSIM's input data, namely the information in tape12, tape35, etc.
+\end{itemize}
+
+\section{Classes}
+The \software{hypsoRR} model engine currently comprises the classes listes in \tabref{tab:hypsoRR:classes}.
+
+\begin{table}[h]
+  \caption{Classes of the \software{hypsoRR} model engine. \label{tab:hypsoRR:classes}}
+\begin{tabular}{ll}
+  \hline
+  Class & Details to be found at \\
+  \hline
+  Sub-basin & \secref{sec:classes:catchmod:subbasin-default} \\
+  Reach  & \secref{sec:classes:catchmod:reach-default} \\
+  Minireach & \secref{sec:classes:catchmod:minireach} \\
+  Node classes & \secref{sec:classes:catchmod:nodes} \\  
+  Lake & \secref{sec:classes:catchmod:lake} \\
+  Gage & \secref{sec:classes:catchmod:gage} \\
+  Rain gage & \secref{sec:classes:catchmod:raingage} \\
+  External inflow & \secref{sec:classes:catchmod:ext-inflow} \\
+  \hline
+\end{tabular}
+\end{table}
+
+\section{Selected applications}
+As of March 2014, \software{hypsoRR} was set-up and calibrated for the river basins listes in \tabref{tab:hypsoRR:applications}.
+
+\begin{table}[h]
+  \caption{Applications of the \software{hypsoRR} model engine. \label{tab:hypsoRR:applications}}
+  \begin{tabular}{lll}
+  \hline
+  Basin/Gage & Country & \sqkm{} \\
+  \hline
+  Wilde Weißeritz / Ammelsdorf & Germany & 70 \\
+  Rheraya & Morocco & 220 \\
+  Marikina & Philippines & 570 \\
+  Neckar / Kirchtellinsfurt & Germany & 2317 \\
+  Mahanadi / Mundali & India & 135000 \\
+  \hline
+  \end{tabular}  
+\end{table}
